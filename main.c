@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <string.h>
 
-// INTEGRANTE BERNARDO - COLECAO DE ALBUNS
+// Autor: Bernardo Rodrigues Benato RGM: 47415487 - Colecao de Albuns
 struct Album {
     int id;
     char titulo[50];
@@ -9,12 +8,10 @@ struct Album {
     char genero[30];
     int ativo;
 };
-
 struct Album albuns[50];
 int totalAlbuns = 0;
 
-
-// KAMILA - MUSICAS
+// Autor: Kamila de Cassia Marcon - RGM: 47123141- Catalogo de Musicas
 struct Musica {
     int id;
     int idAlbum;
@@ -22,509 +19,194 @@ struct Musica {
     int reproducoes;
     int ativo;
 };
-
 struct Musica musicas[50];
 int totalMusicas = 0;
 
-
-// IZADORA - ACERVO E CONSERVACAO DOS CDS
+// Autor: Izadora Maria Rodrigues - RGM:47728345 Acervo e Conservacao
 struct Acervo {
     int idAlbum;
     char tipo[30];
     char conservacao[30];
+    int ativo;
 };
-
 struct Acervo acervo[50];
 int totalAcervo = 0;
 
-
-// CASSIANI - HISTORICO DE AUDICOES
+// Autor: Cassiani Teixeira de Paula - RGM: 46620494 - Historico de Audicoes
 struct Audicao {
     int idMusica;
     int quantidade;
+    char data[11];
+    int ativo;
 };
-
 struct Audicao audicoes[50];
 int totalAudicoes = 0;
 
-
-// ============================================================
-// FUNCOES AUXILIARES TODOS OS INTEGRANTES
-// ============================================================
-
+// Autor: Bernardo Rodrigues Benato - Busca auxiliar de albuns
 int buscarAlbum(int id) {
     int i;
-
     for (i = 0; i < totalAlbuns; i++) {
-        if (albuns[i].id == id && albuns[i].ativo == 1)
+        if (albuns[i].id == id && albuns[i].ativo == 1) {
             return i;
+        }
     }
-
     return -1;
 }
 
-int buscarMusica(int id) {
-    int i;
-
-    for (i = 0; i < totalMusicas; i++) {
-        if (musicas[i].id == id && musicas[i].ativo == 1)
-            return i;
-    }
-
-    return -1;
-}
-
-void cabecalho() {
-    printf("\n====================================\n");
-    printf("        CDTECA PESSOAL\n");
-    printf("====================================\n");
-}
-
-
-// ============================================================
-// MODULO 1 - COLECAO DE ALBUNS
-// BERNARDO
-// ============================================================
-
+// Autor: Bernardo Rodrigues Benato - Modulo de albuns
 void moduloAlbuns() {
-    int op, id, i;
-
+    int opcao, id, i;
     do {
-        printf("\n--- MODULO 1: COLECAO DE ALBUNS ---\n");
+        printf("\n--- COLECAO DE ALBUNS ---\n");
         printf("1. Cadastrar album\n");
         printf("2. Listar albuns\n");
         printf("3. Buscar album\n");
-        printf("4. Remover album\n");
-        printf("0. Voltar\n");
-        printf("Opcao: ");
-        scanf("%d", &op);
-
-        switch (op) {
+        printf("4. Editar album\n");
+        printf("5. Remover album\n");
+        printf("0. Voltar\nOpcao: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
             case 1:
                 if (totalAlbuns >= 50) {
-                    printf("Limite de albuns atingido!\n");
+                    printf("Limite de 50 albuns atingido.\n");
                     break;
                 }
-
                 printf("ID: ");
                 scanf("%d", &id);
-
                 if (buscarAlbum(id) != -1) {
-                    printf("ID ja cadastrado!\n");
+                    printf("Este ID ja esta em uso.\n");
                     break;
                 }
-
                 albuns[totalAlbuns].id = id;
-
                 printf("Titulo: ");
-                scanf(" %49[^\n]", albuns[totalAlbuns].titulo);
-
+                scanf("%49s", albuns[totalAlbuns].titulo);
                 printf("Artista: ");
-                scanf(" %49[^\n]", albuns[totalAlbuns].artista);
-
-                printf("Genero musical: ");
-                scanf(" %29[^\n]", albuns[totalAlbuns].genero);
-
+                scanf("%49s", albuns[totalAlbuns].artista);
+                printf("Genero: ");
+                scanf("%29s", albuns[totalAlbuns].genero);
                 albuns[totalAlbuns].ativo = 1;
                 totalAlbuns++;
-
-                printf("Album cadastrado!\n");
+                printf("Album cadastrado.\n");
                 break;
-
             case 2:
                 for (i = 0; i < totalAlbuns; i++) {
                     if (albuns[i].ativo == 1) {
-                        printf("\nID: %d\n", albuns[i].id);
-                        printf("Titulo: %s\n", albuns[i].titulo);
-                        printf("Artista: %s\n", albuns[i].artista);
-                        printf("Genero: %s\n", albuns[i].genero);
+                        printf("ID: %d | Titulo: %s | Artista: %s | Genero: %s\n",
+                               albuns[i].id, albuns[i].titulo,
+                               albuns[i].artista, albuns[i].genero);
                     }
                 }
                 break;
-
             case 3:
-                printf("ID do album: ");
+                printf("ID: ");
                 scanf("%d", &id);
-
                 i = buscarAlbum(id);
-
-                if (i == -1) {
-                    printf("Album nao encontrado!\n");
-                } else {
-                    printf("Titulo: %s\n", albuns[i].titulo);
-                    printf("Artista: %s\n", albuns[i].artista);
-                }
+                if (i == -1) printf("Album nao encontrado.\n");
+                else printf("Titulo: %s | Artista: %s\n",
+                            albuns[i].titulo, albuns[i].artista);
                 break;
-
             case 4:
-                printf("ID do album: ");
+                printf("[Em construcao] Edicao de album.\n");
+                break;
+            case 5:
+                printf("ID: ");
                 scanf("%d", &id);
-
                 i = buscarAlbum(id);
-
-                if (i == -1) {
-                    printf("Album nao encontrado!\n");
-                } else {
+                if (i == -1) printf("Album nao encontrado.\n");
+                else {
                     albuns[i].ativo = 0;
-                    printf("Album removido!\n");
+                    printf("Album removido.\n");
                 }
                 break;
-
             case 0:
+                printf("Voltando ao menu principal.\n");
                 break;
-
             default:
-                printf("Opcao invalida!\n");
+                printf("Opcao invalida.\n");
         }
-
-    } while (op != 0);
+    } while (opcao != 0);
 }
 
-
-// ============================================================
-// MODULO 2 - CATALOGO DE MUSICAS
-// KAMILA
-// ============================================================
-
+// Autor: Kamila - Modulo de musicas
 void moduloMusicas() {
-    int op, id, idAlbum, i;
-
+    int opcao;
     do {
-        printf("\n--- MODULO 2: CATALOGO DE MUSICAS ---\n");
-        printf("1. Cadastrar musica\n");
-        printf("2. Listar musicas\n");
-        printf("3. Remover musica\n");
-        printf("0. Voltar\n");
-        printf("Opcao: ");
-        scanf("%d", &op);
-
-        switch (op) {
-            case 1:
-                if (totalMusicas >= 50) {
-                    printf("Limite de musicas atingido!\n");
-                    break;
-                }
-
-                printf("ID da musica: ");
-                scanf("%d", &id);
-
-                if (buscarMusica(id) != -1) {
-                    printf("ID ja cadastrado!\n");
-                    break;
-                }
-
-                printf("ID do album: ");
-                scanf("%d", &idAlbum);
-
-                if (buscarAlbum(idAlbum) == -1) {
-                    printf("Cadastre o album primeiro!\n");
-                    break;
-                }
-
-                musicas[totalMusicas].id = id;
-                musicas[totalMusicas].idAlbum = idAlbum;
-
-                printf("Nome da musica: ");
-                scanf(" %49[^\n]", musicas[totalMusicas].titulo);
-
-                musicas[totalMusicas].reproducoes = 0;
-                musicas[totalMusicas].ativo = 1;
-
-                totalMusicas++;
-                printf("Musica cadastrada!\n");
-                break;
-
-            case 2:
-                for (i = 0; i < totalMusicas; i++) {
-                    if (musicas[i].ativo == 1) {
-                        printf("\nID: %d\n", musicas[i].id);
-                        printf("Musica: %s\n", musicas[i].titulo);
-                        printf("Reproducoes: %d\n",
-                               musicas[i].reproducoes);
-                    }
-                }
-                break;
-
-            case 3:
-                printf("ID da musica: ");
-                scanf("%d", &id);
-
-                i = buscarMusica(id);
-
-                if (i == -1) {
-                    printf("Musica nao encontrada!\n");
-                } else {
-                    musicas[i].ativo = 0;
-                    printf("Musica removida!\n");
-                }
-                break;
-
-            case 0:
-                break;
-
-            default:
-                printf("Opcao invalida!\n");
+        printf("\n--- CATALOGO DE MUSICAS ---\n");
+        printf("1. Cadastrar musica\n2. Listar / buscar musicas\n");
+        printf("3. Editar musica\n4. Remover musica\n");
+        printf("0. Voltar\nOpcao: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
+            case 1: printf("[Em construcao] Cadastro de musica.\n"); break;
+            case 2: printf("[Em construcao] Consulta de musicas.\n"); break;
+            case 3: printf("[Em construcao] Edicao de musica.\n"); break;
+            case 4: printf("[Em construcao] Remocao de musica.\n"); break;
+            case 0: break;
+            default: printf("Opcao invalida.\n");
         }
-
-    } while (op != 0);
+    } while (opcao != 0);
 }
 
-
-// ============================================================
-// MODULO 3 - ORGANIZACAO E CONSERVACAO DO ACERVO
-// IZADORA
-// ============================================================
-
+// Autor: Izadora - Modulo de acervo
 void moduloAcervo() {
-    int op, id, i;
-
+    int opcao;
     do {
-        printf("\n--- MODULO 3: ORGANIZACAO DO ACERVO ---\n");
-        printf("1. Registrar CD\n");
-        printf("2. Consultar acervo\n");
-        printf("3. Atualizar conservacao\n");
-        printf("0. Voltar\n");
-        printf("Opcao: ");
-        scanf("%d", &op);
-
-        switch (op) {
-            case 1:
-                if (totalAcervo >= 50) {
-                    printf("Limite do acervo atingido!\n");
-                    break;
-                }
-
-                printf("ID do album: ");
-                scanf("%d", &id);
-
-                if (buscarAlbum(id) == -1) {
-                    printf("Album nao encontrado!\n");
-                    break;
-                }
-
-                for (i = 0; i < totalAcervo; i++) {
-                    if (acervo[i].idAlbum == id) {
-                        printf("Album ja registrado no acervo!\n");
-                        break;
-                    }
-                }
-
-                if (i < totalAcervo)
-                    break;
-
-                acervo[totalAcervo].idAlbum = id;
-
-                printf("Tipo de midia (CD, CD duplo etc.): ");
-                scanf(" %29[^\n]", acervo[totalAcervo].tipo);
-
-                printf("Estado de conservacao: ");
-                scanf(" %29[^\n]",
-                      acervo[totalAcervo].conservacao);
-
-                totalAcervo++;
-                printf("CD registrado no acervo!\n");
-                break;
-
-            case 2:
-                for (i = 0; i < totalAcervo; i++) {
-                    id = buscarAlbum(acervo[i].idAlbum);
-
-                    if (id != -1) {
-                        printf("\nAlbum: %s\n", albuns[id].titulo);
-                        printf("Midia: %s\n", acervo[i].tipo);
-                        printf("Conservacao: %s\n",
-                               acervo[i].conservacao);
-                    }
-                }
-                break;
-
-            case 3:
-                printf("ID do album: ");
-                scanf("%d", &id);
-
-                for (i = 0; i < totalAcervo; i++) {
-                    if (acervo[i].idAlbum == id) {
-                        printf("Nova conservacao: ");
-                        scanf(" %29[^\n]",
-                              acervo[i].conservacao);
-
-                        printf("Conservacao atualizada!\n");
-                        break;
-                    }
-                }
-
-                if (i == totalAcervo)
-                    printf("CD nao encontrado no acervo!\n");
-
-                break;
-
-            case 0:
-                break;
-
-            default:
-                printf("Opcao invalida!\n");
+        printf("\n--- ACERVO E CONSERVACAO ---\n");
+        printf("1. Registrar CD\n2. Listar / buscar CDs\n");
+        printf("3. Editar conservacao\n4. Remover CD\n");
+        printf("0. Voltar\nOpcao: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
+            case 1: printf("[Em construcao] Registro de CD.\n"); break;
+            case 2: printf("[Em construcao] Consulta de CDs.\n"); break;
+            case 3: printf("[Em construcao] Edicao de conservacao.\n"); break;
+            case 4: printf("[Em construcao] Remocao de CD.\n"); break;
+            case 0: break;
+            default: printf("Opcao invalida.\n");
         }
-
-    } while (op != 0);
+    } while (opcao != 0);
 }
 
-
-// ============================================================
-// MODULO 4 - AUDICOES E RELATORIOS
-// CASSIANI
-// ============================================================
-
+// Autor: Cassiani - Modulo de audicoes e relatorios
 void moduloAudicoes() {
-    int op, id, i, pos, maior;
-
+    int opcao;
     do {
-        printf("\n--- MODULO 4: AUDICOES E RELATORIOS ---\n");
-        printf("1. Registrar audicao\n");
-        printf("2. Historico de audicoes\n");
-        printf("3. Musica mais ouvida\n");
-        printf("4. Album mais ouvido\n");
-        printf("0. Voltar\n");
-        printf("Opcao: ");
-        scanf("%d", &op);
-
-        switch (op) {
-            case 1:
-                if (totalAudicoes >= 50) {
-                    printf("Limite de audicoes atingido!\n");
-                    break;
-                }
-
-                printf("ID da musica ouvida: ");
-                scanf("%d", &id);
-
-                pos = buscarMusica(id);
-
-                if (pos == -1) {
-                    printf("Musica nao encontrada!\n");
-                    break;
-                }
-
-                musicas[pos].reproducoes++;
-
-                audicoes[totalAudicoes].idMusica = id;
-                audicoes[totalAudicoes].quantidade = 1;
-                totalAudicoes++;
-
-                printf("Audicao registrada!\n");
-                break;
-
-            case 2:
-                for (i = 0; i < totalAudicoes; i++) {
-                    pos = buscarMusica(audicoes[i].idMusica);
-
-                    printf("Audicao %d: ", i + 1);
-
-                    if (pos != -1)
-                        printf("%s\n", musicas[pos].titulo);
-                    else
-                        printf("Musica removida do catalogo\n");
-                }
-                break;
-
-            case 3:
-                maior = -1;
-                pos = -1;
-
-                for (i = 0; i < totalMusicas; i++) {
-                    if (musicas[i].ativo == 1 &&
-                        musicas[i].reproducoes > maior) {
-                        maior = musicas[i].reproducoes;
-                        pos = i;
-                    }
-                }
-
-                if (pos == -1) {
-                    printf("Nenhuma musica cadastrada!\n");
-                } else {
-                    printf("Musica mais ouvida: %s\n",
-                           musicas[pos].titulo);
-                    printf("Reproducoes: %d\n",
-                           musicas[pos].reproducoes);
-                }
-                break;
-
-            case 4:
-                maior = -1;
-                pos = -1;
-
-                for (i = 0; i < totalAlbuns; i++) {
-                    int j, soma = 0;
-
-                    if (albuns[i].ativo == 0)
-                        continue;
-
-                    for (j = 0; j < totalMusicas; j++) {
-                        if (musicas[j].ativo == 1 &&
-                            musicas[j].idAlbum == albuns[i].id) {
-                            soma += musicas[j].reproducoes;
-                        }
-                    }
-
-                    if (soma > maior) {
-                        maior = soma;
-                        pos = i;
-                    }
-                }
-
-                if (pos == -1) {
-                    printf("Nenhum album cadastrado!\n");
-                } else {
-                    printf("Album mais ouvido: %s\n",
-                           albuns[pos].titulo);
-                    printf("Artista: %s\n", albuns[pos].artista);
-                    printf("Total de reproducoes: %d\n", maior);
-                }
-                break;
-
-            case 0:
-                break;
-
-            default:
-                printf("Opcao invalida!\n");
+        printf("\n--- AUDICOES E RELATORIOS ---\n");
+        printf("1. Registrar audicao\n2. Listar / buscar audicoes\n");
+        printf("3. Editar audicao\n4. Remover audicao\n");
+        printf("5. Musica mais ouvida\n6. Album mais ouvido\n");
+        printf("0. Voltar\nOpcao: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
+            case 1: printf("[Em construcao] Registro de audicao.\n"); break;
+            case 2: printf("[Em construcao] Consulta de audicoes.\n"); break;
+            case 3: printf("[Em construcao] Edicao de audicao.\n"); break;
+            case 4: printf("[Em construcao] Remocao de audicao.\n"); break;
+            case 5: printf("[Em construcao] Relatorio de musica mais ouvida.\n"); break;
+            case 6: printf("[Em construcao] Relatorio de album mais ouvido.\n"); break;
+            case 0: break;
+            default: printf("Opcao invalida.\n");
         }
-
-    } while (op != 0);
+    } while (opcao != 0);
 }
 
-
-// ============================================================
-// FUNCAO PRINCIPAL TODOS OS INTEGRANTES
-// ============================================================
-
+// Autor: Equipe CDteca Pessoal - Menu principal
 int main() {
-    int op;
-
+    int opcao;
     do {
-        cabecalho();
-
-        printf("1. Colecao de albuns\n");
-        printf("2. Catalogo de musicas\n");
-        printf("3. Organizacao do acervo\n");
-        printf("4. Audicoes e relatorios\n");
-        printf("0. Encerrar sistema\n");
-        printf("Escolha uma opcao: ");
-
-        scanf("%d", &op);
-
-        switch (op) {
+        printf("\n========== CDTECA PESSOAL ==========\n");
+        printf("1. Colecao de albuns\n2. Catalogo de musicas\n");
+        printf("3. Organizacao do acervo\n4. Audicoes e relatorios\n");
+        printf("0. Encerrar\nOpcao: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
             case 1: moduloAlbuns(); break;
             case 2: moduloMusicas(); break;
             case 3: moduloAcervo(); break;
             case 4: moduloAudicoes(); break;
-            case 0:
-                printf("Encerrando a CDteca Pessoal!\n");
-                break;
-            default:
-                printf("Opcao invalida!\n");
+            case 0: printf("Encerrando a CDteca.\n"); break;
+            default: printf("Opcao invalida.\n");
         }
-
-    } while (op != 0);
-
+    } while (opcao != 0);
     return 0;
 }
-
