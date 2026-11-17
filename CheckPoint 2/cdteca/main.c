@@ -4,7 +4,7 @@
 #include <locale.h>
 
 #include "utils.h"
-#include "albuns.h"     // Bernardo
+#include "albuns.h"     // Bernardo Benato RGM: 47415487.
 #include "musicas.h"    // Kamila   (usa albuns.h)
 #include "acervo.h"     // Izadora  (usa albuns.h e musicas.h)
 #include "audicoes.h"   // Cassiani (usa todos os anteriores)
