@@ -1,4 +1,4 @@
-// Arquivo: albuns.h | Autor: Bernardo (Nome Completo e RGM)
+// Arquivo: albuns.h | Autor: Bernardo Rodrigues Benato RGM: 47415487.
 // MODULO 1 - COLECAO DE ALBUNS
 #ifndef ALBUNS_H
 #define ALBUNS_H
