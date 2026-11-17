@@ -1,4 +1,4 @@
-// Arquivo: main.c | Autor: Bernardo Rodrigues Benato
+// Arquivo: main.c | Autor: Bernardo Rodrigues Benato RGM: 47415487.
 // Programa independente para testar o modulo de albuns.
 #include "albuns.h"
 
